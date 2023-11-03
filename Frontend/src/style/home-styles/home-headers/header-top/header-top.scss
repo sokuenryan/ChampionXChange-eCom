@@ -1,0 +1,79 @@
+@mixin center-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-header {
+    display: flex;
+    height: 85px;
+}
+
+.header-left {
+    @include center-element()
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.header-right h1 {
+    font-size: 15px;
+}
+
+.login-register-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    gap: 15px;
+  }
+
+  .login-register-wrapper li a {
+    display: flex;
+    justify-content: center;
+  }
+
+.icon {
+    height: 30px;
+    width: 30px;
+    }
+
+.cart-icon {    
+    height: 30px;
+    width: 38px;
+    margin: 5px 10px 0px 25px;
+}
+
+.login-register-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.order-signin-wrapper li {
+    @include center-element()
+}
+
+.order-status {
+    @include center-element()
+}
+
+.sign-in {
+    @include center-element()
+}
+
+.cart {
+    @include center-element()
+}
+
+.header-icon-links {
+    list-style: none;
+}
+
+.header-icon-links a {
+    text-decoration: none;
+    color: black;
+}
+

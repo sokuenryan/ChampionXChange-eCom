@@ -1,0 +1,34 @@
+// home-styles
+@import './home-styles/home.css';
+@import './home-styles/helpers.css';
+
+// home-header-top
+@import './home-styles/home-headers/header-top/header-top.scss';
+@import './home-styles/home-headers/header-top/searchbar.css';
+
+// hearder icon-wrapper styles
+@import './login.css';
+@import './register.css';
+@import './cart-styles/cart.css';
+
+
+// home navbar-menu
+@import './home-styles/home-headers/navbar-menu/navbar.css';
+
+// home-body
+@import './home-styles/home-body/carousel.css';
+@import './home-styles/home-body/custom-news.css';
+@import './home-styles/home-body/carousel-text-box.css';
+
+// logo styles 
+@import './header.css';
+
+// menu styles
+@import './home-styles/home-headers/navbar-menu/menu.css';
+@import './home-styles/home-headers/navbar-menu/menudrop.css';
+
+// home footer
+@import './footer.css';
+
+// media queries
+@import './media-queries.css';

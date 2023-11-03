@@ -1,0 +1,517 @@
+---------------------------
+//Old Carousel Styles
+/* 
+  .carousel-image {
+    flex: 1;
+    object-fit: contain;
+    margin-right: 10px;
+  }
+  
+  .carousel-item > .item-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .carousel-item .item-wrapper img {
+    height: 100%;
+    max-width: 50%;
+    object-fit: contain;
+    margin-right: 20px;
+  }
+
+  /* delete eventually */
+  /* .carousel-item .item-wrapper h1 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 700px;
+  }
+
+.carousel-item h1 {
+    position: relative;
+    font-family: 'Permanant-Marker', cursive;
+    font-size: 20px;
+    color: white;
+}
+
+.indicators {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  bottom: 0;
+  margin-bottom: 10px;
+}
+ */ 
+
+ import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import useMedia from 'use-media';
+
+function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobileScreen = useMedia({ maxWidth: 300 }); // Adjust the breakpoint as needed
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+---------------------------
+  // Close mobile menu when the screen size changes from mobile to desktop
+  useEffect(() => {
+    if (!isMobileScreen) {
+      setIsMobileMenuOpen(false);
+    }
+  }, [isMobileScreen]);
+
+  return (
+    <nav className='navbar'>
+      {/* Mobile Menu Button */}
+      {isMobileScreen && (
+        <button className='menu-icon' onClick={toggleMobileMenu}>
+          {isMobileMenuOpen ? 'Close' : 'Menu'}
+        </button>
+      )}
+
+      {/* Mobile Menu */}
+      {isMobileScreen && isMobileMenuOpen && (
+        <ul className='navbar-list'>
+          <li>
+            <Link to="/trading" onClick={closeMobileMenu}>
+              <button className='btn'>Trading</button>
+            </Link>
+          </li>
+
+        </ul>
+      )}
+
+      {/* Desktop Menu */}
+      <ul className={`navbar-list ${isMobileScreen ? 'desktop-menu' : ''}`}>
+        <li>
+          <Link to="/trading">
+            <button className='btn'>Trading</button>
+          </Link>
+        </li>
+        {/* Add more menu items as needed */}
+      </ul>
+    </nav>
+  );
+}
+export default Navbar;
+
+
+---------------------------
+NEWer Searchbar code
+import React, { useMemo, useRef, useState } from 'react';
+
+function Searchbar() {
+    const [items, setItems] = useState([])
+    const [query, setQuery] = useState("")
+    const inputRef = useRef()
+
+    const filteredItems = useMemo(() => {
+        return items.filter(item => {
+            return item.toLowerCase().includes(query.toLowerCase())
+        })
+    }, [items, query])
+
+    function onSubmit(e) {
+        e.preventDefault()
+
+        const value = inputRef.current.value 
+        if (value === "") return
+        setItems(prev => {
+            return [...prev, value]
+        })
+        
+        inputRef.current.value = ""
+    }
+
+    return (
+    <div>
+        Search: 
+        <input 
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        type="search"
+        />
+        <br />
+        <br />
+        <form onSubmit={onSubmit}>
+            New Item: <input ref={inputRef} type="text" />
+            <button type="submit">Add</button>
+        </form>
+        <h3>Items:</h3>
+        {filteredItems.map(item => (
+            <div>{item}</div>
+        ))}
+        </div>
+    )
+}
+
+export default Searchbar
+---------------------------
+
+OLD Searchbar code 
+import React, { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
+//import axios here
+
+export default function SearchBar() {
+  const [selectedOption, setSelectedOption] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isActive, setIsActive] = useState(false);
+
+  // const options = ['Option 1', 'Option 2', 'Option 3'];
+  // const handleOptionSelect = (option) => {
+  //   setSelectedOption(option);
+  // };
+
+  const handleSearch = () => {
+    const searchResult = `Searching for ${selectedOption} - ${searchQuery}`;
+    console.log(searchResult);
+    setSearchQuery('');
+    setSelectedOption('');
+  };
+
+  return (
+    <div className='searchbar'>
+      <button onClick={handleSearch}><FaSearch style={{ fontSize: '20px', opacity:'80%', fontWeight: 'lighter'}} /></button>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search..."
+        className={`searchbar-input ${isActive ? 'active' : 'default'}`}
+        onFocus={() => setIsActive(true)}
+        onBlur={() => setIsActive(false)}
+      />
+
+
+      {/* <select value={selectedOption} onChange={(e) => handleOptionSelect(e.target.value)}>
+        <option value="">All Categories</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select> */}
+    </div>
+  );
+}
+
+
+
+---------------------------
+WEB DEV SIMPLIFIED CODE SEACHBAR FUNCTIONALITY
+import { useMemo, useRef, useState } from "react";
+
+function App() {
+    const [items, setItems] = useState([])
+    const [query, setQuery] = useState("")
+    const inputRef = useRef()
+
+    const filteredItems = useMemo(() => {
+        return items.filter(item => {
+            return item.toLowerCase().includes(query.toLowerCase())
+        })
+    }, [items, query])
+
+    function onSubmit(e) {
+        e.preventDefault()
+
+        const value = inputRef.current.value 
+        if (value === "") return
+        setItems(prev => {
+            return [...prev, value]
+        })
+        
+        inputRef.current.value = ""
+    }
+
+    return (
+    <div>
+        Search: 
+        <input 
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        type="search"
+        />
+        <br />
+        <br />
+        <form onSubmit={onSubmit}>
+            New Item: <input ref={inputRef} type="text" />
+            <button type="submit">Add</button>
+        </form>
+        <h3>Items:</h3>
+        {filteredItems.map(item => (
+            <div>{item}</div>
+        ))}
+        </div>
+    )
+}
+
+export default App
+---------------------------
+Cart-Icon!
+  {/* <li>
+    <Link to="/cart">
+      <FaShoppingBasket className='cart-icon'/>
+    </Link>
+
+    <div className='icon-text'>
+      <h1>My Orders</h1>
+    </div>
+  </li> */}
+
+  /* Header Styles */
+.contact-header {
+    display: flex;
+    width: 100%;
+    height: 70px;
+    font-size: 15px;
+    border-bottom: .5px solid black;
+    background-color: rgb(214, 210, 210);
+}
+
+.contact-header h1 {
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 100px;
+}
+
+---------------------------
+login Styles
+/* Header Styles */
+.login-header {
+    display: flex;
+    width: 100%;
+    height: 70px;
+    font-size: 15px;
+    border-bottom: .5px solid black;
+    background-color: rgb(214, 210, 210);
+}
+
+.login-header h1 {
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 100px;
+}
+
+.login-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 70px;
+    height: 260px;
+    width: 250px;
+    box-shadow: 0.8px 1px 10px gray;
+}
+
+.login-form-wrapper h1 {
+    margin: 5px;
+}
+
+.login-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90px;
+}
+
+-------------------------------------------
+
+// Old app.py file (using mySQL Marshmallow, SQLAlchemy, Flask, etc.)
+
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+import os
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'We are the champions!'
+
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
+
+# Configure Flask app and database
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
+
+# Define the Item model
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), unique=False)
+    content = db.Column(db.String(144), unique=False)
+
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
+
+# Define the Item schema
+class ItemSchema(ma.Schema):
+    class Meta:
+        fields = ('title', 'content')
+
+# Instantiate the Item schema
+item_schema = ItemSchema()
+items_schema = ItemSchema(many=True)
+
+#ENDPOINT ONE
+# Create a new item
+@app.route('/item', methods=['POST'])
+def add_item():
+    title = request.json['title']
+    content = request.json['content']
+
+    new_item = Item(title, content)
+
+    db.session.add(new_item)
+    db.session.commit()
+
+    item = Item.query.get(new_item.id)
+
+    return item_schema.jsonify(new_item)
+
+#ENDPOINT TWO
+#Endpoint to query all items
+
+@app.route('/items', methods=['GET'])
+def get_items():
+    all_items = Item.query.all()
+    result = items_schema.dump(all_items)
+    return jsonify(result)
+
+#ENDPOINT THREE
+#Show Route/Show Endpoint / Querying a single item
+@app.route('/item/<id>', methods=['GET'])
+def get_item(id):
+    item = Item.query.get(id)
+    return item_schema.jsonify(item)
+
+#ENDPOINT FOUR
+# Endpoint for updating a guide
+@app.route("/item/<id>", methods=['PUT'])
+def item_update(id):
+    item = Item.query.get(id)
+    title = request.json['title']
+    content = request.json['content']
+
+    item.title = title
+    item.content = content
+    
+    db.session.commit()
+    return item_schema.jsonify(item)
+
+# ENDPOINT FIVE
+# Endpoint for deleting an item/record
+@app.route("/item/<id>", methods=['DELETE'])
+def item_delete(id):
+    item = Item.query.get(id)
+    if not item:
+        return jsonify({'message': 'Item not found'})
+
+    db.session.delete(item)
+    db.session.commit()
+
+    return jsonify({'message': 'Item deleted successfully'})
+
+# ERROR HANDLING
+# Endpint  for handling errors
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({'error': 'Not Found'}), 404
+
+@app.errorhandler(500)
+def server_error(error):
+    return jsonify({'error': 'Internal Server Error'}), 500
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+-----------------------------------------------
+//another set of old app.py code 
+#Flask-SQLAlchemy
+#1.Python Flask Tutorial for Beginners
+from flask import Flask
+from formsubmission import ChampxRegisterForm
+from flask_sqlalchemy import SQLAlchemy
+#object for the flask
+app=Flask(__name__)
+#configuration
+app.config['SQLALCHEMY_TRACK_MODIFICATION']=False
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///user.sqlite3'
+app.secret_key="__privatekey__"
+#object for SQLAlchemy
+db=SQLAlchemy(app)
+class User(db.model):
+    id =db.column(db.Integer,primary_key=True)
+    name=db.column(db.String(100))
+    passWord=(db.String(100))
+
+def __init__(self,name,passWord):
+    self.name=name
+    self.passWord=passWord
+
+@app.route('/')
+def defaultHome():
+    return render_template('home.js')
+
+@app.route('/register',methods=['POST', 'GET'])
+def register():
+
+    if __name__=="__main__":
+        db.create_all()
+        app.run(debug=True)
+
+
+------------------------------------------------------------
+BACKEND TESTER
+const axios = require('axios');
+const { expect } = require('chai');
+
+describe('Backend API Test', () => {
+    it('should store nd retrieve data from the backend', async () => {
+        const dataToStore = {
+            title: 'Test Item',
+            content: 'Test is a test item content.',
+        };
+
+        try {
+            const storeResponse = await axios.post('http://localhost:YOUR_BACKEND_PORT/item', dataToStore);
+
+            expect(storeResponse.status).to.equal(200);
+
+            const retrieveResponse = await axios.get('http://localhost:YOUR_BACKEND_PORT/item/' + storeResponse.data.id);
+
+            expect(retrieveResponse.data.title).to.equal(dataToStore.title);
+            expect(retrieveResponse.data.content).to.equal(dataToStore.content);
+        } catch (error) {
+            throw error;
+        }
+    })
+})

@@ -1,0 +1,55 @@
+.carousel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.inner {
+  white-space: nowrap;
+  transition: transform 0.99s;
+  height: 465px;
+}
+
+.carousel-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+
+  background-color: white;
+  color: #fff;
+  position: relative;
+  margin-top: 35px;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.indicators button {
+  border-radius: 30px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.indicators > button.active {
+  background-color: orange;
+  color: #fff;
+}
+
+.image-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.image-wrapper img {
+  height: 338px;
+  width: 338px;
+}

@@ -1,0 +1,51 @@
+.menu-list {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.menu-list ul {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    list-style-type: none;
+};
+
+.menu li {
+    display: grid;
+    justify-content: center;
+}
+
+.menu button {
+    background-color:black;
+    color: white;
+    border-radius: 40%;
+    border-color: gray;
+    border-width: 5px;
+    width: 85px;
+    height: 20px;
+    font-size: 10px;
+};
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-list-open {
+  display: block;
+}
+
+.list-two {
+  width: 600px;
+  margin-right: 400px;
+}
+
+.linked-items ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top: 10px;
+}
+
